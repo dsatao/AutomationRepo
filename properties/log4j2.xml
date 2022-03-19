@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true"
+	name="ViewSense" packages="org.apache.logging.log4j.test">
+	<Properties>
+		<Property name="filename">target/log/application.log</Property>
+	</Properties>
+	<Appenders>
+		<RollingFile name="RollingFile">
+			<FileName>${filename}</FileName>
+			<FilePattern>${filename}%d{yyyy-MM-dd-hh-mm}.log.gz
+			</FilePattern>
+			<PatternLayout>
+				<Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="300"
+					modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy max="5" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="org.apache.logging.log4j.test2" level="all">
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+		<Root level="all">
+			<AppenderRef ref="RollingFile" />
+		</Root>
+	</Loggers>
+</Configuration>
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+{
+        "State": {
+            "version": "1",
+            "SName": "Test",
+            "shippingDetails": {
+                "Address1": "#$Address1",
+                "ZipCode": "#$ZipCode"
+            },
+            "Directions": {
+                "routes": [
+                    {
+                        "taxAmount": "0.0",
+                        "Quantity": "#$Quantity",
+                        "bounds": {
+                            "SerialVersion": [
+                                {
+                                    "text": "1.7 km",
+                                    "value": "1729",
+                                    "time": "02633"
+                                },
+                                {
+                                    "text": "1.9 km",
+                                    "value": "1829",
+                                    "time": "02353"
+                                },
+                                {
+                                    "text": "17 km",
+                                    "value": "1059",
+                                    "time": "02133"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    }
