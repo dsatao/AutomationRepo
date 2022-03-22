@@ -10,12 +10,7 @@ import io.restassured.specification.RequestSpecification;
  */
 
 public class RestApiServices extends BasePage {
-	static RequestSpecification request;
-	Response response;
-	static {
-		RestAssured.baseURI = baseUrl;
-		request = RestAssured.given();
-	}
+	static Response response;
 
 	public Response getRequest(String endpoint) {
 		response = request.request(Method.GET, endpoint);

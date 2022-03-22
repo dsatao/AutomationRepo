@@ -69,85 +69,9 @@ public class stepDefinations {
 		BasePage.addLogsInReports("User Login In Application");
 	}
 
-	@Given("^User enter email as \"([^\"]*)\" on \"([^\"]*)\"$")
-	public void enterEmailOnPage(String email, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.loginInApp(BasePage.getProperty(email));
-		BasePage.addLogsInReports("User Login In Application");
-	}
-	
-	@Given("^User enter \"([^\"]*)\" value as (.*) on \"([^\"]*)\"$")
-	public void enterOnPage(String fieldName,String value, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.enterText(fieldName,BasePage.getProperty(value));
-	}
-
-	@Given("^User Login with email as (.*) on \"([^\"]*)\"$")
-	public void loginInApplication(String email, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.loginInApp(BasePage.getProperty(email));
-		// BasePage.addLogsInReports("User Login In with
-		// Email"+BasePage.getProperty(email));
-	}
-
-	@Given("Update a user with Persona {string} on tab {string}")
-	public void UpdateAUserWithPersona(String persona, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.updateUser(persona);
-	}
-
-	@Given("Delete a user with Persona {string} on tab {string}")
-	public void DeleteAUserWithPersona(String persona, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.deleteUser(persona);
-	}
-
-	@Given("^User click on (.*) as \"([^\"]*)\" on \"([^\"]*)\"$")
-	public void select(String elementText, String elementName, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.clickOnElement(BasePage.getProperty(elementText), elementName);
-		//BasePage.addLogsInReports("User Select Building"+BasePage.getProperty(elementText));
-	}
-
-	@Given("^Validate user is navigated to \"([^\"]*)\"$")
-	public void loginInApplication(String pageName) {
-		page = utility.getPageObject(pageName);
-		page.validatePage();
-	}
-
-	@Then("^User should see \"([^\"]*)\" as (.*) on \"([^\"]*)\"$")
-	public void validateSearchDeviceName(String validationPoint,String value,String pageName) {
-		page = utility.getPageObject(pageName);
-		page.validateSensePageDetails(validationPoint,BasePage.getProperty(value));
-	}
-
-	@Given("^User validate \"([^\"]*)\" link in footer on \"([^\"]*)\"$")
-	public void validateFooterLinks(String linkText, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.verifyIsDispalyed(linkText);
-	}
-
-	@Given("^User navigate to \"([^\"]*)\" tab on \"([^\"]*)\"$")
-	public void navigateToTab(String tabName, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.navigateToTab(tabName);
-	}
-
 	@Then("^Validate user navigated to url of \"([^\"]*)\"$")
 	public void Check_Subheader_Contains(String pageName) {
 		assertion.assertApplicationURLContains(pageName);
-	}
-
-	@Then("^User logout from \"([^\"]*)\"$")
-	public void userLogout(String pageName) {
-		page = utility.getPageObject(pageName);
-		page.userLogoutOption();
-	}
-
-	@Then("^Check subheader contains \"([^\"]*)\" on \"([^\"]*)\"$")
-	public void Check_Subheader_Contains(String header, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.CheckSubHeader(header);
 	}
 
 	@Given("^Set browser \"([^\"]*)\"$")
@@ -204,50 +128,6 @@ public class stepDefinations {
 	public void loadNew_Values() throws IOException, InterruptedException {
 		BasePage.loadConfig();
 		Thread.sleep(6000);
-	}
-
-	@Then("Create a user with Persona \"([^\"]*)\" on tab \"([^\"]*)\"")
-	public void create_a_user_with_Persona(String persona, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.createUser(persona);
-	}
-
-	@Then("Validate user is created/updated on tab \"([^\"]*)\"")
-	public void validate_user_is_created(String pageName) {
-		page = utility.getPageObject(pageName);
-		page.validateUserCreatedOrNot();
-	}
-
-	@Given("^Validate/Check user able to login with newly created user (.*) on \"([^\"]*)\"$")
-	public void ValidateUserAbleToLoginWithNewlyCreatedUser(String emailText, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.logoutFromApp();
-		page.loginInApp(BasePage.getProperty(emailText));
-	}
-
-	@Given("Error message displays for \"([^\"]*)\" on \"([^\"]*)\"")
-	public void ErrorMessageDisplaysFor(String errorMessage, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.loginPageErrors(errorMessage);
-	}
-	
-	@Given("User should see error message displayed as \"([^\"]*)\" on \"([^\"]*)\"$")
-	public void ErrorMessageInvalidCrede(String errorMessage, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.invalidLoginErrors(errorMessage);
-	}
-	
-
-	@Then("Validate user is deleted on tab \"([^\"]*)\"")
-	public void validate_user_is_deleted(String pageName) {
-		page = utility.getPageObject(pageName);
-		page.validateUserDeletedOrNot();
-	}
-
-	@Given("^User clicks on \"([^\"]*)\" as \"([^\"]*)\" on \"([^\"]*)\"$")
-	public void clickOnLink(String elementText, String elementName, String pageName) {
-		page = utility.getPageObject(pageName);
-		page.clickOnElement(elementText, elementName);
 	}
 
 	@After

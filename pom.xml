@@ -119,7 +119,6 @@
 				<version>2.22.1</version>
 				<configuration>
 					<systemPropertyVariables>
-						<application>vbm</application>
 						<platform>web</platform>
 						<environment>qa</environment>
 					</systemPropertyVariables>

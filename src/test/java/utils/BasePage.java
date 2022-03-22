@@ -8,26 +8,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.core.api.Scenario;
-import pages.common.CommonInterface;
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 
 /*
  * @author : Dipak.Satao
  */
 
-public class BasePage implements CommonInterface {
+public class BasePage {
 	public static Properties prop, prop1, locProp;
-	public static String application, platform,environment;
+	public static String platform, environment;
 	public static WebDriver driver;
 	public static WebDriverWait wait;
 	public static String baseUrl;
@@ -36,6 +35,7 @@ public class BasePage implements CommonInterface {
 	public static Scenario scenario;
 	public static Map<String, String> requestBody = new ConcurrentHashMap<String, String>();
 	public Map<Object, Object> APIVars = new HashMap<Object, Object>();
+	static RequestSpecification request;
 
 	public static void initConfig() {
 		System.setProperty("log4j2.configurationFile", "./properties/log4j2.xml");
@@ -46,7 +46,10 @@ public class BasePage implements CommonInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getDriverInstance(); // will provide an driver instance
+		if (platform.equals("web"))
+			getDriverInstance(); // will provide an driver instance
+		else
+			getRestAssuredInstance();
 	}
 
 	public static void loadConfigFromFile() throws IOException {
@@ -55,24 +58,20 @@ public class BasePage implements CommonInterface {
 			prop = new Properties();
 			prop.load(reader);
 			try {
-				application = System.getProperty("application");
 				platform = System.getProperty("platform");
 				environment = System.getProperty("environment");
 			} catch (Exception e) {
 				System.out.println("Maven Params Not Passed");
 			}
 
-			if (application == null)
-				application = prop.getProperty("application");
-
 			if (platform == null)
 				platform = prop.getProperty("platform");
-			
+
 			if (environment == null)
 				environment = prop.getProperty("environment");
-			
+
 			FileReader reader1 = new FileReader(
-					"./properties/" + application + "/" + platform + "/" + environment + "/" + "app.properties");
+					"./properties/" + platform + "/" + environment + "/" + "app.properties");
 
 			prop1 = new Properties();
 			prop1.load(reader1);
@@ -91,8 +90,10 @@ public class BasePage implements CommonInterface {
 		switch (prop.getProperty("browser")) {
 		case "chrome":
 			System.setProperty("webdriver.chrome.driver", "./support/chromedriver.exe");
-			/*ChromeOptions options = new ChromeOptions();
-			options.addArguments("--headless");*/
+			/*
+			 * ChromeOptions options = new ChromeOptions();
+			 * options.addArguments("--headless");
+			 */
 			driver = new ChromeDriver();
 			wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			break;
@@ -110,12 +111,16 @@ public class BasePage implements CommonInterface {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds((long) 30));
 	}
 
+	public static void getRestAssuredInstance() {
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
+	}
+
 	public static void loadConfig() throws IOException {
-		application = prop.getProperty("application");
 		platform = prop.getProperty("platform");
 		environment = prop.getProperty("environment");
 
-		FileReader reader1 = new FileReader("./properties/" + application + "/" + platform + "/" + environment + "/" + "app.properties");
+		FileReader reader1 = new FileReader("./properties/" + platform + "/" + environment + "/" + "app.properties");
 
 		prop1 = new Properties();
 		prop1.load(reader1);
@@ -167,9 +172,4 @@ public class BasePage implements CommonInterface {
 		BasePage.scenario.write(message);
 	}
 
-	@Override
-	public void clickOnDropdownAndSelectValue(String dropdownName, String dropdownValue) {
-		// TODO Auto-generated method stub
-		
-	}
 }
