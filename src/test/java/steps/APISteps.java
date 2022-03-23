@@ -4,17 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.Option;
 import com.jayway.jsonpath.Predicate;
 import com.jayway.jsonpath.spi.json.JacksonJsonNodeJsonProvider;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.datatable.dependency.com.fasterxml.jackson.databind.node.ArrayNode;
 import io.cucumber.java.en.Given;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
@@ -23,7 +25,7 @@ import utils.FileUtility;
 import utils.RestApiServices;
 
 /*
- * @author : Jayesh.Hinge
+ * @author : Dipak.Satao
  */
 
 public class APISteps extends BasePage {
@@ -133,23 +135,24 @@ public class APISteps extends BasePage {
 	public void Load_and_set_payload_from_file_using_absolute_path(String filepath) {
 		APIVars.put("REQUEST_BODY", FileUtility.replaceValuesInFile(filepath, requestBody, log));
 	}
-
-	@Given("^Make \"([^\"]*)\" call and save response body text as variable \"([^\"]*)\"$")
-	public void Make_call_and_save_response_body_text_as_variable(String method, String var) {
+	
+	@Given("^Make \"([^\"]*)\" call with (.*) resource and save response body text as variable \"([^\"]*)\"$")
+	public void Make_call_and_save_response_body_text_as_variable(String method,String resourceKey, String var) {
 		RestApiServices ra = new RestApiServices();
 		Response response = null;
+		String endpoint = getApiResourceProperty(resourceKey);
 		switch (method) {
 		case "POST":
-			response = ra.postRequest((String) APIVars.get("PATH"));
+			response = ra.postRequest(endpoint);
 			break;
 		case "GET":
-			response = ra.getRequest((String) APIVars.get("PATH"));
+			response = ra.getRequest(endpoint);
 			break;
 		case "PUT":
-			response = ra.putRequest((String) APIVars.get("PATH"));
+			response = ra.putRequest(endpoint);
 			break;
 		case "DELETE":
-			response = ra.deleteRequest((String) APIVars.get("PATH"));
+			response = ra.deleteRequest(endpoint);
 			break;
 		default:
 			log.info("Please specify the correct method name");
@@ -162,22 +165,23 @@ public class APISteps extends BasePage {
 		APIVars.put(var, response.getBody().prettyPrint());
 	}
 
-	@Given("^Make \"([^\"]*)\" call and save response as variable \"([^\"]*)\"$")
-	public void Make_call_and_save_response_as_variable(String method, String var) {
+	@Given("^Make \"([^\"]*)\" call with (.*) resource and save response as variable \"([^\"]*)\"$")
+	public void Make_call_and_save_response_as_variable(String method,String resourceKey, String var) {
 		RestApiServices ra = new RestApiServices();
 		Response response = null;
+		String endpoint = getApiResourceProperty(resourceKey);
 		switch (method) {
 		case "POST":
-			response = ra.postRequest((String) APIVars.get(""));
+			response = ra.postRequest(endpoint);
 			break;
 		case "GET":
-			response = ra.getRequest((String) APIVars.get(""));
+			response = ra.getRequest(endpoint);
 			break;
 		case "PUT":
-			response = ra.putRequest((String) APIVars.get(""));
+			response = ra.putRequest(endpoint);
 			break;
 		case "DELETE":
-			response = ra.deleteRequest((String) APIVars.get(""));
+			response = ra.deleteRequest(endpoint);
 			break;
 		default:
 			log.info("Please specify the correct method name");

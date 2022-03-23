@@ -119,7 +119,7 @@
 				<version>2.22.1</version>
 				<configuration>
 					<systemPropertyVariables>
-						<platform>web</platform>
+						<platform>api</platform>
 						<environment>qa</environment>
 					</systemPropertyVariables>
 				</configuration>

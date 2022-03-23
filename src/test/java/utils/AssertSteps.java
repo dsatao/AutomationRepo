@@ -3,6 +3,10 @@ package utils;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+/*
+ * @author : Dipak.Satao
+ */
+
 public class AssertSteps extends BasePage {
 	CommonActions commonAction = new CommonActions();
 
@@ -35,7 +39,7 @@ public class AssertSteps extends BasePage {
 		Assert.assertTrue(commonAction.getUrl().contains(expectedText),
 				"Text match failed. Actual [" + commonAction.getUrl() + "] Expected was [" + expectedText + "]");
 	}
-	
+
 	public void assertThatElementIsDisplayed(WebElement element) {
 		log.info("Verifying Element Is Dispalyed");
 		BasePage.addLogsInReports("Verifying Element Is Dispalyed");

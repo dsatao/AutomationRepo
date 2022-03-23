@@ -1,37 +1,47 @@
 {
-        "State": {
-            "version": "1",
-            "SName": "Test",
-            "shippingDetails": {
-                "Address1": "#$Address1",
-                "ZipCode": "#$ZipCode"
-            },
-            "Directions": {
-                "routes": [
-                    {
-                        "taxAmount": "0.0",
-                        "Quantity": "#$Quantity",
-                        "bounds": {
-                            "SerialVersion": [
-                                {
-                                    "text": "1.7 km",
-                                    "value": "1729",
-                                    "time": "02633"
-                                },
-                                {
-                                    "text": "1.9 km",
-                                    "value": "1829",
-                                    "time": "02353"
-                                },
-                                {
-                                    "text": "17 km",
-                                    "value": "1059",
-                                    "time": "02133"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        }
-    }
+	"postAccount": {
+		"id": "string",
+		"createdOn": "2022-03-23T08:06:40Z",
+		"createdById": "string",
+		"lastUpdated": "2022-03-23T08:06:40Z",
+		"lastUpdatedById": "string",
+		"version": "string",
+		"objectState": "New",
+		"token": 0,
+		"code": "string",
+		"type": "AccountsPayable",
+		"name": "string",
+		"displayAccount": "string",
+		"description": "string",
+		"level": 0,
+		"rootAccountId": "string",
+		"isActive": true,
+		"parentAccountId": "string",
+		"parentAccount": "string",
+		"openingBalance": 0,
+		"openingBalanceAsOf": "2022-03-23T08:06:40Z",
+		"routingNumber": "string",
+		"runningBalance": 0,
+		"taxLine": "string",
+		"customFields": [
+			{
+				"id": "string",
+				"createdOn": "2022-03-23T08:06:40Z",
+				"createdById": "string",
+				"lastUpdated": "2022-03-23T08:06:40Z",
+				"lastUpdatedById": "string",
+				"version": "string",
+				"objectState": "New",
+				"token": 0,
+				"value": "string",
+				"description": "string",
+				"label": "string",
+				"definitionId": "string",
+				"type": "Text"
+			}
+		]
+	},
+	"Directions": {
+		
+	}
+}

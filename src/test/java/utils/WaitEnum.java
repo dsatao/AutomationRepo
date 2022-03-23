@@ -1,5 +1,9 @@
 package utils;
 
+/*
+ * @author : Dipak.Satao
+ */
+
 public enum WaitEnum {
 
 	MIN_TIME(10), MAX_TIME(60), AVG_TIME(20);

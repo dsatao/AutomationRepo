@@ -20,8 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Predicate;
 
 /*
- * @author : Jayesh.Hinge
- * @date : 01/01/2022
+ * @author : Dipak.Satao
  */
 
 public class CommonActions extends BasePage {
@@ -137,21 +136,21 @@ public class CommonActions extends BasePage {
 			throw e;
 		}
 	}
-	
+
 	public void clickClearAndType(WebElement locator, String value) {
 		try {
 			click(locator);
 			locator.sendKeys(Keys.CONTROL, "a");
 			locator.sendKeys(Keys.DELETE);
 			locator.sendKeys(value);
-			CommonActions.addLogsInReports(
-					"Done clearing locator using [" + locator + "] and typing value [" + value + "]");
+			CommonActions
+					.addLogsInReports("Done clearing locator using [" + locator + "] and typing value [" + value + "]");
 			log.info("Done clearing locator using [" + locator + "] and typing value [" + value + "]");
 		} catch (WebDriverException e) {
-			CommonActions.addLogsInReports("Failed to clear on locator[" + locator
-					+ "] and typing value [" + value + "], Error: [" + e.getMessage() + "]");
-			log.error("Failed to clear on locator[" + locator + "] and typing value [" + value
-					+ "]d, Error: [" + e.getMessage() + "]", e);
+			CommonActions.addLogsInReports("Failed to clear on locator[" + locator + "] and typing value [" + value
+					+ "], Error: [" + e.getMessage() + "]");
+			log.error("Failed to clear on locator[" + locator + "] and typing value [" + value + "]d, Error: ["
+					+ e.getMessage() + "]", e);
 			throw e;
 		}
 	}

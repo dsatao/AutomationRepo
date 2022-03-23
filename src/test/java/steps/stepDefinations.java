@@ -15,11 +15,9 @@ import io.cucumber.java.en.Then;
 import utils.AssertSteps;
 import utils.BasePage;
 import utils.CommonActions;
-import utils.Utility;
 
 public class stepDefinations {
 	BasePage page;
-	Utility utility = new Utility();
 	CommonActions ca = new CommonActions();
 	AssertSteps assertion = new AssertSteps();
 

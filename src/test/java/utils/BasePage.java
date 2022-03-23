@@ -25,7 +25,7 @@ import io.restassured.specification.RequestSpecification;
  */
 
 public class BasePage {
-	public static Properties prop, prop1, locProp;
+	public static Properties prop, prop1, resourceProp;
 	public static String platform, environment;
 	public static WebDriver driver;
 	public static WebDriverWait wait;
@@ -36,6 +36,7 @@ public class BasePage {
 	public static Map<String, String> requestBody = new ConcurrentHashMap<String, String>();
 	public Map<Object, Object> APIVars = new HashMap<Object, Object>();
 	static RequestSpecification request;
+	public static String accessToken;
 
 	public static void initConfig() {
 		System.setProperty("log4j2.configurationFile", "./properties/log4j2.xml");
@@ -114,6 +115,20 @@ public class BasePage {
 	public static void getRestAssuredInstance() {
 		RestAssured.baseURI = baseUrl;
 		request = RestAssured.given();
+		try {
+			loadApiConfig();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void loadApiConfig() throws IOException {
+
+		FileReader reader1 = new FileReader("./properties/" + platform + "/"  + "resources.properties");
+
+		resourceProp = new Properties();
+		resourceProp.load(reader1);
 	}
 
 	public static void loadConfig() throws IOException {
@@ -129,6 +144,7 @@ public class BasePage {
 	}
 
 	public static void tearDownBrowser() {
+		if (platform.equals("web"))
 		driver.quit();
 	}
 
@@ -140,12 +156,12 @@ public class BasePage {
 		prop1.setProperty(key, value);
 	}
 
-	public static String getLocProperty(String key) {
-		return locProp.getProperty(key);
+	public static String getApiResourceProperty(String key) {
+		return resourceProp.getProperty(key);
 	}
 
-	public static void setLocProperty(String key, String value) {
-		locProp.setProperty(key, value);
+	public static void setApiResourceProperty(String key, String value) {
+		resourceProp.setProperty(key, value);
 	}
 
 	public String getMainProperty(String key) {

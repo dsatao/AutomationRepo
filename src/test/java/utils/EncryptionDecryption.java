@@ -1,6 +1,5 @@
 package utils;
 
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,15 +9,14 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-
 /*
- * @author : Jayesh.Hinge
+ * @author : Dipak.Satao
  */
 
 public class EncryptionDecryption {
-	
-	public static final String app1QAPassword="";
-	public static final String app2QAPassword="";
+
+	public static final String app1QAPassword = "";
+	public static final String app2QAPassword = "";
 
 	private static SecretKeySpec secretKey;
 	private static byte[] key;
@@ -36,7 +34,7 @@ public class EncryptionDecryption {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static String encrypt(String strToEncrypt, String secret) {
 		try {
 			prepareSecreteKey(secret);

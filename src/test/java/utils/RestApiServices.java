@@ -1,9 +1,7 @@
 package utils;
 
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.http.Method;
-import io.restassured.specification.RequestSpecification;
 
 /*
  * @author : Dipak.Satao
@@ -14,7 +12,9 @@ public class RestApiServices extends BasePage {
 
 	public Response getRequest(String endpoint) {
 		response = request.request(Method.GET, endpoint);
-		System.out.println(response.body());
+		System.out.println("URL" + baseUrl + endpoint);
+
+		System.out.println(request.toString());
 		return response;
 	}
 
